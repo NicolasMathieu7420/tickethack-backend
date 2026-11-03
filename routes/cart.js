@@ -32,7 +32,7 @@ console.log(req.body)
 /*check si voyage dans le panier*/
 
 router.get("/", (req, res) => {
-   const date = new Date(req.body.date);
+  const date = new Date(req.body.date);
  const hour = date.getHours();
  const minutes = date.getMinutes();
  const heureMinute = `${hour}:${minutes}`;
