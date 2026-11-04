@@ -8,13 +8,14 @@ const moment = require('moment');
 router.get("/", async (req, res) => {
     const dateStr = req.query.date;
     const startOfDay = moment(dateStr).startOf('day').toDate();
-    
+    const endOfDay = moment(dateStr).endOf('day').toDate();
+
   /*check if trip exist*/
   let tripExisting = await Trip.find({
     departure: new RegExp(req.query.departure, "i"),
     arrival: new RegExp(req.query.arrival, "i"),
-    date: {$gte: startOfDay},
-  });
+    date: {$gte: startOfDay, $lt: endOfDay}});
+
   if (tripExisting.length > 0) {
     res.json({ result: true, tripExisting });
   } else {
