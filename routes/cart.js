@@ -31,10 +31,6 @@ router.post("/", (req, res) => {
 /*check si voyage dans le panier*/
 
 router.get("/", (req, res) => {
-  const date = new Date(req.body.date);
-  const hour = date.getHours();
-  const minutes = date.getMinutes();
-  const heureMinute = `${hour}:${minutes}`;
   Cart.find({}).then((data) => {
     if (data && data.length>0) {
       res.json({ result: true, cart: data });
