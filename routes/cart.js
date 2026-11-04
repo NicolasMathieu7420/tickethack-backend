@@ -11,7 +11,7 @@ router.post("/", (req, res) => {
   const minutes = date.getMinutes();
   const heureMinute = `${hour}:${minutes}`;
 
-  console.log(req.body);
+  //console.log(req.body);
   const newItemCart = new Cart({
     departure: req.body.departure,
     arrival: req.body.arrival,
@@ -20,7 +20,7 @@ router.post("/", (req, res) => {
   });
   newItemCart.save().then((saveDoc) => {
     if (saveDoc) {
-      console.log(saveDoc);
+      //console.log(saveDoc);
       res.json({ result: true, cart: saveDoc });
     } else {
       res.json({ result: false, error: "Failed to add trip to cart" });
@@ -36,8 +36,8 @@ router.get("/", (req, res) => {
   const minutes = date.getMinutes();
   const heureMinute = `${hour}:${minutes}`;
   Cart.find({}).then((data) => {
-    if (data) {
-      res.json({ result: true, trip: data });
+    if (data && data.length>0) {
+      res.json({ result: true, cart: data });
     } else {
       res.json({ result: false, error: "No ticket in your card" });
     }
@@ -47,7 +47,7 @@ router.get("/", (req, res) => {
 /* pour supprimer un voyage dans le panier*/
 
 router.delete("/:id", (req, res) => {
-  Cart.deleteOne({ id: req.params.id }).then((deleteDoc) => {
+  Cart.deleteOne({ _id: req.params.id }).then((deleteDoc) => {
     if (deleteDoc.deletedCount > 0) {
       // document successfully deleted
       Cart.find().then((data) => {
