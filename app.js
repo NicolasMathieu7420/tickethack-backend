@@ -6,7 +6,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 
-
+var app = express();
 const cors = require('cors');
 app.use(cors());
 
@@ -17,7 +17,7 @@ var cartRouter = require('./routes/cart');
 var bookingRouter = require('./routes/booking');
                                               
                                                  
-var app = express();
+
 
 app.use(logger('dev'));
 app.use(express.json());
